@@ -3,11 +3,17 @@
   border-bottom: 1px solid #CDCDCD;
 }
 
-#top-bar ul li {
+ul.item-inline li {
   display: inline;
   margin-right: 35px;
 }
 
+ul.item-inline li button {
+  background: none;
+  color: #6c757d;
+  border-width: 0;
+  padding: 0;
+}
 
 @media (max-width: 767px) {
   #top-bar {
