@@ -1,0 +1,20 @@
+#top-bar {
+  padding: 20px 0;
+  border-bottom: 1px solid #CDCDCD;
+}
+
+#top-bar ul li {
+  display: inline;
+  margin-right: 35px;
+}
+
+
+@media (max-width: 767px) {
+  #top-bar {
+    padding: 10px 0;
+  }
+
+  #top-bar ul li {
+    margin-right: 20px;
+  }
+}
