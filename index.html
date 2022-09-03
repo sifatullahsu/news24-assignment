@@ -22,11 +22,11 @@
     <div id="top-bar" class="container">
       <div class="row">
         <div class="col-4">
-          <a href="#"><img src="img/logo.png" alt="" style="width: 150px;"></a>
+          <a href="#"><img src="img/news24-logo.png" alt="" style="width: 150px;"></a>
         </div>
         <div class="col-8 d-flex align-items-center justify-content-end">
           <ul class="list-unstyled text-muted d-inline pt-3 item-inline">
-            <li class="active"><a href="">News</a></li>
+            <li class="active"><a href="index.html">News</a></li>
             <li><a href="">Blog</a></li>
           </ul>
           <img src="img/avatar.png" alt="">
@@ -38,6 +38,7 @@
 
   <main class="container">
     <section id="news-category" class="py-4">
+      <span class="loader"></span>
       <ul class="list-unstyled text-muted d-inline pt-3 item-inline"></ul>
     </section>
 
@@ -45,7 +46,7 @@
       <div class="row">
         <div class="col-12 position-relative">
           <span class="loader position-absolute" style="right: 30px; top: 10px;"></span>
-          <p class="bg-white text-dark rounded p-3 mb-0 d-none"></p>
+          <p class="bg-white text-dark rounded p-3 mb-0"></p>
         </div>
       </div>
     </section>
@@ -54,7 +55,8 @@
 
     <section>
       <!-- Modal -->
-      <div class="modal fade" id="newsModal" tabindex="-1" aria-labelledby="newsModalLabel" aria-hidden="true">
+      <div class="modal fade" id="newsModal" tabindex="-1" aria-labelledby="newsModalLabel" aria-hidden="true"
+        data-bs-backdrop="static" data-bs-keyboard="false">
         <div class="modal-dialog modal-xl">
           <div class="modal-content">
             <div class="modal-header">
@@ -71,7 +73,7 @@
   </main>
   <!-- Main End -->
 
-  <footer class="bg-white p-4 text-center">
+  <footer class="bg-white p-4 text-center mt-5">
     <p class="mb-0">Copyright 2021 News24</p>
   </footer>
 

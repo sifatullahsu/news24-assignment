@@ -71,6 +71,8 @@ const loaderControl = (path, bool) =>{
 }
 
 const newsCategoriesAPI = () => {
+  loaderControl('#news-category .loader', true);
+
   fetch('https://openapi.programming-hero.com/api/news/categories')
   .then(response => response.json())
   .then(data => newsCategories(data.data.news_category))
@@ -84,6 +86,8 @@ const newsCategories = data => {
     li.innerHTML = `<button onclick="getNewsByCategoryAPI('${element.category_id}')">${element.category_name}</button>`;
     categories.append(li);
   });
+
+  loaderControl('#news-category .loader', false);
 }
 
 newsCategoriesAPI();
@@ -112,7 +116,6 @@ const getNewsByCategory = data =>{
   news.innerHTML = '';
 
   if (totalNews){
-    itemCount.classList.remove('d-none');
     itemCount.innerText = `${totalNews} items found`;
     
     data.forEach(element => {
@@ -127,19 +130,19 @@ const getNewsByCategory = data =>{
             <div class="col-12 col-md-8 col-lg-9 d-flex flex-column justify-content-between py-2">
               <div>
                 <h3>${element.title}</h3>
-                <p class="text-muted">${element.details.slice(0, 400)}</p>
+                <p class="text-muted">${element.details.length > 400 ? element.details.slice(0, 400) + '...' : element.details}</p>
               </div>
               <div class="row d-flex align-items-center">
                 <div class="col-6 col-lg-3 d-flex">
                   <img src="${element.author.img}" alt="" class="rounded-circle" width="50px" height="50px">
                   <div class="d-flex flex-column ps-2">
-                    <span>${element.author.name !== null ? element.author.name : 'No Data Found'}</span>
+                    <span>${element.author.name !== null ? element.author.name : 'No Data Available'}</span>
                     <span class="text-muted">${dateMaker(element.author.published_date)}</span>
                   </div>
                 </div>
                 <div class="col-3 col-lg-3 text-center">
                   <img src="img/carbon_view.svg" alt="">
-                  <span>${element.total_view !== null ? element.total_view : 'No Data Found'}</span>
+                  <span>${element.total_view !== null ? element.total_view : 'No Data Available'}</span>
                 </div>
                 <div class="col-12 col-lg-3 -order-1 text-start text-lg-center">
                   ${ratingMaker(element.rating.number)}
@@ -156,8 +159,7 @@ const getNewsByCategory = data =>{
       news.append(div);
     });
   } else {
-    itemCount.innerText = ``;
-    itemCount.classList.add('d-none');
+    itemCount.innerText = `No data found..`;
 
     news.innerHTML = `<div class="row"><div class="col-12"><h3>No Data Found..</h3></div></div>`;
   }
@@ -180,7 +182,6 @@ const getFullNewsAPI = id =>{
 }
 
 const getFullNews = element =>{
-  console.log(element);
   const modalBody = querySelector('.news-modal-body');
   modalBody.innerHTML = '';
 
@@ -191,7 +192,7 @@ const getFullNews = element =>{
       <div class="row">
         <div class="col-12 d-flex flex-column justify-content-between py-2">
           <div>
-            <h3>${element.title}</h3>
+            <h2>${element.title}</h2>
             <img src="${element.image_url}" alt="" class="rounded img-fluid my-3 w-50">
             <p class="text-muted">${element.details}</p>
           </div>
@@ -218,6 +219,10 @@ const getFullNews = element =>{
   `;
   modalBody.append(div);
 
-
   loaderControl('.modal .loader', false);
 }
+
+querySelector('.modal .btn-close').addEventListener('click', function(){
+  const modalBody = querySelector('.news-modal-body');
+  modalBody.innerHTML = '';
+});
