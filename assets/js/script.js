@@ -54,6 +54,22 @@ const ratingMaker = rating =>{
   return result;
 }
 
+const loaderControl = bool =>{
+  const loader = getId('loader');
+
+  if(bool === true){
+    loader.innerHTML = `
+    <button class="btn btn-primary" type="button" disabled>
+      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+      Loading...
+    </button>
+    `;
+  } 
+  else{
+    loader.innerHTML = '';
+  }
+}
+
 const newsCategoriesAPI = () => {
   fetch('https://openapi.programming-hero.com/api/news/categories')
   .then(response => response.json())
@@ -77,6 +93,7 @@ newsCategoriesAPI();
 
 
 const getNewsByCategoryAPI = category_id =>{
+  loaderControl(true);
   fetch(`https://openapi.programming-hero.com/api/news/category/${category_id}`)
   .then(response => response.json())
   .then(data => getNewsByCategory(data.data))
@@ -143,6 +160,8 @@ const getNewsByCategory = data =>{
 
     news.innerHTML = `<div class="row"><div class="col-12"><h3>No Data Found..</h3></div></div>`;
   }
+
+  loaderControl(false);
 }
 
 
