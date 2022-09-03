@@ -1,3 +1,32 @@
+* {
+  box-sizing: border-box;
+}
+
+a {
+  color: #6c757d;
+  text-decoration: none;
+}
+
+.active {
+  position: relative;
+}
+
+.active a {
+  color: #5D5FEF;
+  font-weight: 500;
+}
+
+.active a::after,
+.active button::after {
+  content: '';
+  bottom: -15px;
+  left: 30%;
+  width: 20px;
+  height: 2px;
+  background-color: #5D5FEF;
+  position: absolute;
+}
+
 #top-bar {
   padding: 20px 0;
   border-bottom: 1px solid #CDCDCD;
@@ -15,6 +44,8 @@ ul.item-inline li button {
   padding: 0;
 }
 
+
+
 @media (max-width: 767px) {
   #top-bar {
     padding: 10px 0;
@@ -22,5 +53,16 @@ ul.item-inline li button {
 
   #top-bar ul li {
     margin-right: 20px;
+  }
+
+  .-order-1 {
+    order: -1;
+  }
+}
+
+@media (max-width: 991px) {
+  .-order-1 {
+    order: -1;
+    margin-bottom: 15px;
   }
 }
