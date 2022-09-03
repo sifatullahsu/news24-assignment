@@ -54,8 +54,8 @@ const ratingMaker = rating =>{
   return result;
 }
 
-const loaderControl = bool =>{
-  const loader = getId('loader');
+const loaderControl = (path, bool) =>{
+  const loader = querySelector(path);
 
   if(bool === true){
     loader.innerHTML = `
@@ -93,7 +93,8 @@ newsCategoriesAPI();
 
 
 const getNewsByCategoryAPI = category_id =>{
-  loaderControl(true);
+  loaderControl('#news-query-result .loader',true);
+
   fetch(`https://openapi.programming-hero.com/api/news/category/${category_id}`)
   .then(response => response.json())
   .then(data => getNewsByCategory(data.data))
@@ -132,19 +133,19 @@ const getNewsByCategory = data =>{
                 <div class="col-6 col-lg-3 d-flex">
                   <img src="${element.author.img}" alt="" class="rounded-circle" width="50px" height="50px">
                   <div class="d-flex flex-column ps-2">
-                    <span>${element.author.name}</span>
+                    <span>${element.author.name !== null ? element.author.name : 'No Data Found'}</span>
                     <span class="text-muted">${dateMaker(element.author.published_date)}</span>
                   </div>
                 </div>
                 <div class="col-3 col-lg-3 text-center">
                   <img src="img/carbon_view.svg" alt="">
-                  <span>${element.total_view}</span>
+                  <span>${element.total_view !== null ? element.total_view : 'No Data Found'}</span>
                 </div>
                 <div class="col-12 col-lg-3 -order-1 text-start text-lg-center">
                   ${ratingMaker(element.rating.number)}
                 </div>
                 <div class="col-3 col-lg-3 text-end">
-                  <img src="img/bi_arrow-right-short.svg" alt="" data-bs-toggle="modal" data-bs-target="#newsModal">
+                  <img src="img/bi_arrow-right-short.svg" alt="" onclick="getFullNewsAPI('${element._id}')" data-bs-toggle="modal" data-bs-target="#newsModal">
                 </div>
               </div>
             </div>
@@ -161,8 +162,62 @@ const getNewsByCategory = data =>{
     news.innerHTML = `<div class="row"><div class="col-12"><h3>No Data Found..</h3></div></div>`;
   }
 
-  loaderControl(false);
+  loaderControl('#news-query-result .loader', false);
 }
 
 
 // getNewsByCategoryAPI('01');
+
+
+// =====================
+
+const getFullNewsAPI = id =>{
+  loaderControl('.modal .loader', true);
+
+  fetch(`https://openapi.programming-hero.com/api/news/${id}`)
+  .then(response => response.json())
+  .then(data => getFullNews(data.data[0]))
+}
+
+const getFullNews = element =>{
+  console.log(element);
+  const modalBody = querySelector('.news-modal-body');
+  modalBody.innerHTML = '';
+
+  const div = document.createElement('div');
+  div.innerHTML = `
+  <div class="row">
+    <div class="col-12 news bg-white rounded p-3 mb-4">
+      <div class="row">
+        <div class="col-12 d-flex flex-column justify-content-between py-2">
+          <div>
+            <h3>${element.title}</h3>
+            <img src="${element.image_url}" alt="" class="rounded img-fluid my-3 w-50">
+            <p class="text-muted">${element.details}</p>
+          </div>
+          <div class="row d-flex align-items-center mt-5">
+            <div class="col-6 col-lg-4 d-flex">
+              <img src="${element.author.img}" alt="" class="rounded-circle" width="50px" height="50px">
+              <div class="d-flex flex-column ps-2">
+                <span>${element.author.name !== null ? element.author.name : 'No Data Found'}</span>
+                <span class="text-muted">${dateMaker(element.author.published_date)}</span>
+              </div>
+            </div>
+            <div class="col-3 col-lg-4 text-center">
+              <img src="img/carbon_view.svg" alt="">
+              <span>${element.total_view !== null ? element.total_view : 'No Data Found'}</span>
+            </div>
+            <div class="col-12 col-lg-4 -order-1 text-start text-lg-end">
+              ${ratingMaker(element.rating.number)}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  `;
+  modalBody.append(div);
+
+
+  loaderControl('.modal .loader', false);
+}

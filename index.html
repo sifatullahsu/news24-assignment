@@ -22,7 +22,7 @@
     <div id="top-bar" class="container">
       <div class="row">
         <div class="col-4">
-          <img src="img/logo.png" alt="" style="width: 150px;">
+          <a href="#"><img src="img/logo.png" alt="" style="width: 150px;"></a>
         </div>
         <div class="col-8 d-flex align-items-center justify-content-end">
           <ul class="list-unstyled text-muted d-inline pt-3 item-inline">
@@ -38,15 +38,13 @@
 
   <main class="container">
     <section id="news-category" class="py-4">
-      <ul class="list-unstyled text-muted d-inline pt-3 item-inline">
-        <li><button>Home</button></li>
-      </ul>
+      <ul class="list-unstyled text-muted d-inline pt-3 item-inline"></ul>
     </section>
 
     <section id="news-query-result">
       <div class="row">
         <div class="col-12 position-relative">
-          <span id="loader" class="position-absolute" style="right: 30px; top: 10px;"></span>
+          <span class="loader position-absolute" style="right: 30px; top: 10px;"></span>
           <p class="bg-white text-dark rounded p-3 mb-0 d-none"></p>
         </div>
       </div>
@@ -60,9 +58,10 @@
         <div class="modal-dialog modal-xl">
           <div class="modal-content">
             <div class="modal-header">
+              <span class="loader"></span>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="news-modal-body">
+            <div class="news-modal-body px-5 py-3">
               ...
             </div>
           </div>
@@ -71,6 +70,10 @@
     </section>
   </main>
   <!-- Main End -->
+
+  <footer class="bg-white p-4 text-center">
+    <p class="mb-0">Copyright 2021 News24</p>
+  </footer>
 
   <!-- Bootstrap Script -->
   <script src="assets/js/bootstrap.bundle.min.js"></script>
