@@ -45,13 +45,30 @@
 
     <section id="news-query-result">
       <div class="row">
-        <div class="col-12 bg-white text-dark rounded p-3">
-          <span>4 items found for category Entertainment</span>
+        <div class="col-12">
+          <p class="bg-white text-dark rounded p-3 mb-0 d-none"></p>
         </div>
       </div>
     </section>
 
-    <section id="news-area" class="my-4">
+    <section id="loader"></section>
+
+    <section id="news-area" class="my-4"></section>
+
+    <section>
+      <!-- Modal -->
+      <div class="modal fade" id="newsModal" tabindex="-1" aria-labelledby="newsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="news-modal-body">
+              ...
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
   </main>
   <!-- Main End -->

@@ -22,6 +22,12 @@ a {
   font-weight: 500;
 }
 
+.btn-active {
+  background: skyblue;
+  padding: 3px 7px;
+  border-radius: 4px;
+}
+
 .active a::after,
 .active button::after {
   content: '';

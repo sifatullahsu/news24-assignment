@@ -2,6 +2,10 @@ const querySelector = path =>{
   return document.querySelector(path);
 }
 
+const getId = id =>{
+  return document.getElementById(id);
+}
+
 const dateMaker = dateTime =>{
   return new Date(dateTime).toLocaleDateString();
 }
@@ -61,15 +65,12 @@ const newsCategories = data => {
 
   data.forEach(element => {
     const li = document.createElement('li');
-    li.innerHTML = `<button>${element.category_name}</button>`;
+    li.innerHTML = `<button onclick="getNewsByCategoryAPI('${element.category_id}')">${element.category_name}</button>`;
     categories.append(li);
-
-    // Get Category By category_id
-    // getNewsByCategoryAPI(element.category_id);
   });
 }
 
-newsCategoriesAPI()
+newsCategoriesAPI();
 
 
 // =================================
@@ -82,51 +83,67 @@ const getNewsByCategoryAPI = category_id =>{
 }
 
 const getNewsByCategory = data =>{
-  console.log(data);
+  // Data Sorting by total_view
+  data.sort((a, b) => b.total_view - a.total_view);
+  
+  const totalNews = data.length;
+
+  const itemCount = querySelector('#news-query-result p');
 
   const news = querySelector('#news-area');
+  news.innerHTML = '';
 
-  data.forEach(element => {
-    const div = document.createElement('div');
-    div.innerHTML = `
-    <div class="row">
-      <div class="col-12 news bg-white rounded p-3 mb-4">
-        <div class="row">
-          <div class="col-12 col-md-4 col-lg-3">
-            <img src="${element.thumbnail_url}" alt="" class="rounded img-fluid w-100">
-          </div>
-          <div class="col-12 col-md-8 col-lg-9 d-flex flex-column justify-content-between py-2">
-            <div>
-              <h3>${element.title}</h3>
-              <p class="text-muted">${element.details}</p>
+  if (totalNews){
+    itemCount.classList.remove('d-none');
+    itemCount.innerText = `${totalNews} items found`;
+    
+    data.forEach(element => {
+      const div = document.createElement('div');
+      div.innerHTML = `
+      <div class="row">
+        <div class="col-12 news bg-white rounded p-3 mb-4">
+          <div class="row">
+            <div class="col-12 col-md-4 col-lg-3">
+              <img src="${element.thumbnail_url}" alt="" class="rounded img-fluid w-100">
             </div>
-            <div class="row d-flex align-items-center">
-              <div class="col-6 col-lg-3 d-flex">
-                <img src="${element.author.img}" alt="" class="rounded-circle" width="50px" height="50px">
-                <div class="d-flex flex-column ps-2">
-                  <span>${element.author.name}</span>
-                  <span class="text-muted">${dateMaker(element.author.published_date)}</span>
+            <div class="col-12 col-md-8 col-lg-9 d-flex flex-column justify-content-between py-2">
+              <div>
+                <h3>${element.title}</h3>
+                <p class="text-muted">${element.details.slice(0, 400)}</p>
+              </div>
+              <div class="row d-flex align-items-center">
+                <div class="col-6 col-lg-3 d-flex">
+                  <img src="${element.author.img}" alt="" class="rounded-circle" width="50px" height="50px">
+                  <div class="d-flex flex-column ps-2">
+                    <span>${element.author.name}</span>
+                    <span class="text-muted">${dateMaker(element.author.published_date)}</span>
+                  </div>
                 </div>
-              </div>
-              <div class="col-3 col-lg-3 text-center">
-                <img src="img/carbon_view.svg" alt="">
-                <span>${element.total_view}</span>
-              </div>
-              <div class="col-12 col-lg-3 -order-1 text-start text-lg-center">
-                ${ratingMaker(element.rating.number)}
-              </div>
-              <div class="col-3 col-lg-3 text-end">
-                <img src="img/bi_arrow-right-short.svg" alt="">
+                <div class="col-3 col-lg-3 text-center">
+                  <img src="img/carbon_view.svg" alt="">
+                  <span>${element.total_view}</span>
+                </div>
+                <div class="col-12 col-lg-3 -order-1 text-start text-lg-center">
+                  ${ratingMaker(element.rating.number)}
+                </div>
+                <div class="col-3 col-lg-3 text-end">
+                  <img src="img/bi_arrow-right-short.svg" alt="" data-bs-toggle="modal" data-bs-target="#newsModal">
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    `;
-    news.append(div);
-  });
+      `;
+      news.append(div);
+    });
+  } else {
+    itemCount.innerText = ``;
+    itemCount.classList.add('d-none');
+
+    news.innerHTML = `<div class="row"><div class="col-12"><h3>No Data Found..</h3></div></div>`;
+  }
 }
 
 
-getNewsByCategoryAPI('01');
+// getNewsByCategoryAPI('01');
