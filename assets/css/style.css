@@ -55,7 +55,13 @@ ul.item-inline li button {
   background: none;
   color: #6c757d;
   border-width: 0;
-  padding: 0;
+  padding: 2px;
+  border-radius: 4px;
+}
+
+ul.item-inline li button.active {
+  background: #5D5FEF !important;
+  color: #fff;
 }
 
 

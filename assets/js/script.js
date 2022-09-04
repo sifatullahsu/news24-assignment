@@ -97,6 +97,16 @@ newsCategoriesAPI();
 
 
 const getNewsByCategoryAPI = category_id =>{
+  const isActiveClass = document.querySelectorAll('ul.item-inline li button.active');
+  if(isActiveClass.length !== 0){
+    for(const item of isActiveClass){
+      item.classList.remove('active');
+    }
+  }
+
+  const theEvent = window.event.target;
+  theEvent.classList.add('active');
+
   loaderControl('#news-query-result .loader',true);
 
   fetch(`https://openapi.programming-hero.com/api/news/category/${category_id}`)
