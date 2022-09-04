@@ -15,7 +15,7 @@ const ratingMaker = rating =>{
   const star2 = `<i class="fa-regular fa-star-half-stroke"></i>`;
   const star3 = `<i class="fa-solid fa-star"></i>`;
 
-  var result = '';
+  let result = '';
   
   if(rating == 5){
     result = star3 + star3 + star3 + star3 + star3;
@@ -76,6 +76,11 @@ const newsCategoriesAPI = () => {
   fetch('https://openapi.programming-hero.com/api/news/categories')
   .then(response => response.json())
   .then(data => newsCategories(data.data.news_category))
+  .catch(error => {
+    console.log(error);
+    alert(error);
+    loaderControl('#news-category .loader', false);
+  })
 }
 
 const newsCategories = data => {
@@ -112,6 +117,11 @@ const getNewsByCategoryAPI = category_id =>{
   fetch(`https://openapi.programming-hero.com/api/news/category/${category_id}`)
   .then(response => response.json())
   .then(data => getNewsByCategory(data.data))
+  .catch(error => {
+    console.log(error);
+    alert(error);
+    loaderControl('#news-query-result .loader', false);
+  })
 }
 
 const getNewsByCategory = data =>{
@@ -189,6 +199,11 @@ const getFullNewsAPI = id =>{
   fetch(`https://openapi.programming-hero.com/api/news/${id}`)
   .then(response => response.json())
   .then(data => getFullNews(data.data[0]))
+  .catch(error => {
+    console.log(error);
+    alert(error);
+    loaderControl('.modal .loader', false);
+  })
 }
 
 const getFullNews = element =>{
