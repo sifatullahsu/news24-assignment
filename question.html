@@ -40,58 +40,106 @@
     <section class="mt-5">
       <div class="row">
         <div class="col-12">
-          <div class="accordion" id="accordionExample">
+          <div class="accordion" id="javascript-question">
             <div class="accordion-item">
-              <h2 class="accordion-header" id="headingOne">
+              <h2 class="accordion-header" id="questionOne">
                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
                   aria-expanded="true" aria-controls="collapseOne">
-                  Accordion Item #1
+                  What's the difference between var, let, and const?
                 </button>
               </h2>
-              <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
-                data-bs-parent="#accordionExample">
+              <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="questionOne"
+                data-bs-parent="#javascript-question">
                 <div class="accordion-body">
-                  <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse
-                  plugin adds the appropriate classes that we use to style each element. These classes control the
-                  overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this
-                  with custom CSS or overriding our default variables. It's also worth noting that just about any HTML
-                  can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                  var variables can be updated and re-declared within its scope; let variables can be updated
+                  but not re-declared; const variables can neither be updated nor re-declared. One of the issues is
+                  that the variables declared with the var keyword can be re-declared or updated in the same scope.
+                  This could lead to a serious problem if we declare another variable with the same name in the same
+                  scope; the new value will replace the old one. The let keyword should be used in situations where we
+                  want to declare a variable that should be restricted to the block in which it is restricted. Also,
+                  variables declared with the let keyword cannot be updated or re-declared. The const keyword follows
+                  the same rules as the let keyword. The only difference with const is that const is used to define only
+                  constant values in JavaScript programs.
                 </div>
               </div>
             </div>
             <div class="accordion-item">
-              <h2 class="accordion-header" id="headingTwo">
+              <h2 class="accordion-header" id="questionTwo">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                   data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                  Accordion Item #2
+                  What's the difference between arrow function and regular function?
                 </button>
               </h2>
-              <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
-                data-bs-parent="#accordionExample">
+              <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="questionTwo"
+                data-bs-parent="#javascript-question">
                 <div class="accordion-body">
-                  <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse
-                  plugin adds the appropriate classes that we use to style each element. These classes control the
-                  overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this
-                  with custom CSS or overriding our default variables. It's also worth noting that just about any HTML
-                  can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                  Arrow function — also called fat arrow function— is a new feature introduced in ES6 that is a more
+                  concise syntax for writing function expressions. While both regular JavaScript functions and arrow
+                  functions work in a similar manner, there are certain differences between them.
+                  <pre class="mt-3">
+                    var add = function(x, y) {
+                      return x + y;
+                    };
+                    // ES6
+                    let add = (x, y) => { return x + y };
+                  </pre>
+                  The arrow function example above allows a developer to accomplish the same result with fewer lines of
+                  code and approximately half the typing. Curly brackets aren't required if only one expression is
+                  present.
+                  <br><br>
+                  Arrow functions do not have an arguments binding. However, they have access to the arguments object of
+                  the closest non-arrow parent function. Named and rest parameters are heavily relied upon to capture
+                  the arguments passed to arrow functions.
+                  <br><br>
+                  Unlike regular functions, arrow functions do not have their own this. The value of this inside an
+                  arrow function remains the same throughout the lifecycle of the function and is always bound to the
+                  value of this in the closest non-arrow parent function.
                 </div>
               </div>
             </div>
             <div class="accordion-item">
-              <h2 class="accordion-header" id="headingThree">
+              <h2 class="accordion-header" id="questionThree">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                   data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                  Accordion Item #3
+                  What's the difference between map, forEach, filter, and find?
                 </button>
               </h2>
-              <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
-                data-bs-parent="#accordionExample">
+              <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="questionThree"
+                data-bs-parent="#javascript-question">
                 <div class="accordion-body">
-                  <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse
-                  plugin adds the appropriate classes that we use to style each element. These classes control the
-                  overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this
-                  with custom CSS or overriding our default variables. It's also worth noting that just about any HTML
-                  can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                  <h5>.map():</h5>
+                  .map() executes the same code on every element in an array and returns a new array with the updated
+                  elements.
+
+                  <h5>.forEach:</h5>
+                  .forEach(), is used to execute the same code on every element in an array but does not change the
+                  array and it returns undefined.
+
+                  <h5>.filter():</h5>
+                  .filter() checks every element in an array to see if it meets a certain criteria and returns a new
+                  array with the elements that return truthy for the criteria.
+
+                  <h5>.find():</h5>
+                  .find() When you want to select a single element from an array.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="questionFour">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                  Why should I use template string?
+                </button>
+              </h2>
+              <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="questionFour"
+                data-bs-parent="#javascript-question">
+                <div class="accordion-body">
+                  Template strings are a powerful feature of modern JavaScript released in ES6. It lets us
+                  insert/interpolate variables and expressions into strings without needing to concatenate like in older
+                  versions of JavaScript. It allows us to create strings that are complex and contain dynamic elements.
+                  Another great thing that comes with template strings are tags. Tags are functions that take a string
+                  and the decomposed parts of the string as parameters and are great for converting strings to different
+                  entities.
                 </div>
               </div>
             </div>
@@ -109,8 +157,6 @@
   <!-- Bootstrap Script -->
   <script src="assets/js/bootstrap.bundle.min.js"></script>
 
-  <!-- Script -->
-  <script src="assets/js/script.js"></script>
 </body>
 
 </html>
