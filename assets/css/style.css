@@ -45,8 +45,10 @@ a {
 }
 
 ul.item-inline li {
-  display: inline;
+  display: inline-block;
   margin-right: 35px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 ul.item-inline li button {

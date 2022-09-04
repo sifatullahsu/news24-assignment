@@ -83,7 +83,7 @@ const newsCategories = data => {
 
   data.forEach(element => {
     const li = document.createElement('li');
-    li.innerHTML = `<button onclick="getNewsByCategoryAPI('${element.category_id}')">${element.category_name}</button>`;
+    li.innerHTML = `<button onclick="getNewsByCategoryAPI('${element.category_id}')" data-category-id="${element.category_id}">${element.category_name}</button>`;
     categories.append(li);
   });
 
@@ -222,7 +222,9 @@ const getFullNews = element =>{
   loaderControl('.modal .loader', false);
 }
 
-querySelector('.modal .btn-close').addEventListener('click', function(){
-  const modalBody = querySelector('.news-modal-body');
-  modalBody.innerHTML = '';
-});
+for(const item of document.querySelectorAll('.modal .close')){
+  item.addEventListener('click', function(){
+    const modalBody = querySelector('.news-modal-body');
+    modalBody.innerHTML = '';
+  });
+}
